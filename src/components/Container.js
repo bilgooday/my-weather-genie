@@ -58,7 +58,6 @@ class Container extends Component {
           <div class="col-lg-6 col-md-8 col-12 center-content">
             <SearchBox
             getWeather={this.handleSearch}
-            showResults={this.unhideResults}
             />
           </div>
         </div>
