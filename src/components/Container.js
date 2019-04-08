@@ -12,7 +12,8 @@ class Container extends Component {
       third_day: [],
       city: undefined,
       sunrise: undefined,
-      sunset: undefined
+      sunset: undefined,
+      valid_query: undefined
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -24,7 +25,6 @@ class Container extends Component {
     fetch(proxy_url + 'https://www.metaweather.com/api/location/search/?query=' + city)
       .then(response => response.json())
       .then(function(responseData) {
-        console.log('woeid is ' + responseData[0].woeid)
         return fetch(proxy_url + 'https://www.metaweather.com/api/location/' + responseData[0].woeid)
       })
       .then(data => data.json())
@@ -36,11 +36,13 @@ class Container extends Component {
           sunset: weatherData.sun_set,
           next_date: weatherData.consolidated_weather[0],
           day_after: weatherData.consolidated_weather[1],
-          third_day: weatherData.consolidated_weather[2]
+          third_day: weatherData.consolidated_weather[2],
+          valid_query: true
         })
       })
       .catch(error => {
         console.log('Houston, we have a problem: ' + error);
+        this.setState({valid_query: false})
       })
   }
 
@@ -71,6 +73,7 @@ class Container extends Component {
               next_day={this.state.next_date}
               second_day={this.state.day_after}
               third_day={this.state.third_day}
+              has_response={this.state.valid_query}
             />
           </div>
         </div>

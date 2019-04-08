@@ -10,6 +10,7 @@ class Results extends Component {
   }
 
   render() {
+    if (this.props.has_response) {
     return(
       <div id="results-container" class="card">
         <div class="card-body center-text">
@@ -44,6 +45,16 @@ class Results extends Component {
         </div>
       </div>
     )
+  }
+  else {
+    return(
+      <div id="results-container" class="card">
+        <div class="card-body center-text">
+          <h3 class="text-warning">Results not found - please try another city!</h3>
+        </div>
+      </div>
+    )
+  }
   }
 }
 
